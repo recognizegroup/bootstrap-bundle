@@ -1,0 +1,4 @@
+<div class="alert alert-{{ type }}">
+	{% if dismiss is not defined or (dismiss is defined and dismiss) %}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{% endif %}
+	{% autoescape false %}{{ alert|trans }}{% endautoescape %}
+</div>

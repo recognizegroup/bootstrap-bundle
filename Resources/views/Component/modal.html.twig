@@ -1,0 +1,17 @@
+{% if id is defined and id is not empty %}
+	<div class="modal fade" id="{{ id }}" tabindex="-1" role="dialog" aria-labelledby="lbl_{{ id }}" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="lbl_{{ id }}">{% block title %}{% endblock %}</h4>
+				</div>
+				<div class="modal-body">{% block body %}{% endblock %}</div>
+				<div class="modal-footer">{% block footer %}{% endblock %}</div>
+			</div>
+		</div>
+	</div>
+	{% block script %}{% endblock %}
+{% else %}
+	{% include ':Component:alert.html.twig' with { type:'danger', alert: 'component.modal.error.missing_id' } %}
+{% endif %}

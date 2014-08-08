@@ -1,0 +1,46 @@
+{% set page = app.request.get('offset') %}
+{% set limit = app.request.get('limit') %}
+{% set pages = (total/limit)|round(0, 'ceil') %}
+{% if pages >= 2 %}
+	{% set offSet = 0 %}
+	{% set maxPages = (pages >= 7) ? 7 : pages %}
+	{% set center = (maxPages/2)|round(0, 'ceil') %}
+	{% if (pages > maxPages) and (page >= center) %}
+		{% set offSet = (page - center) %}
+		{% if ((page + center) > pages) %}
+			{% set offSet = offSet - (((page + center) - pages) - 1) %}
+		{% endif %}
+	{% endif %}
+	<ul class="pagination" style="margin: 0;">
+		<li{% if page == 1 %} class="disabled"{% endif %}>
+			<a href="{{ path(app.request.get('_route'), { offset: 1, limit: limit }) }}" title="{% trans %}component.pagination.button.title.first{% endtrans %}">
+				&laquo;
+			</a>
+		</li>
+		<li{% if page == 1 %} class="disabled"{% endif %}>
+			<a href="{{ path(app.request.get('_route'), { offset: (page - 1), limit: limit }) }}" title="{% trans %}component.pagination.button.title.previous{% endtrans %}">
+				{% trans %}component.pagination.button.previous{% endtrans %}
+			</a>
+		</li>
+		{% for i in (1 + offSet)..(maxPages + offSet) %}
+			<li{% if page == i %} class="disabled"{% endif %}>
+				<a href="{{ path(app.request.get('_route'), { offset: i, limit: limit }) }}" title="{% trans %}component.pagination.button.title.page{% endtrans %} {{ i }}">
+					{{ i }}
+				</a>
+			</li>
+		{% endfor %}
+		<li{% if (page == pages) %} class="disabled"{% endif %}>
+			<a href="{{ path(app.request.get('_route'), { offset: ((page == pages) ? page : (page + 1)), limit: limit }) }}" title="{% trans %}component.pagination.button.title.next{% endtrans %}">
+				{% trans %}component.pagination.button.next{% endtrans %}
+			</a>
+		</li>
+		<li{% if (page == pages) %} class="disabled"{% endif %}>
+			<a href="{{ path(app.request.get('_route'), { offset: pages, limit: limit }) }}" title="{% trans %}component.pagination.button.title.last{% endtrans %}">
+				&raquo;
+			</a>
+		</li>
+		<li>
+			<small style="padding-left: 4px; line-height: 34px;">&nbsp;{% trans %}component.pagination.text.records{% endtrans %} {{ (page * limit)- limit + 1 }} {% trans %}component.pagination.text.to{% endtrans %} {% if page == pages %}{{ (pages * limit) - ((pages * limit) - (total)) }}{% else %}{{ (page * limit) }}{% endif %} {% trans %}component.pagination.text.out_off{% endtrans %} {{ total }}</small>
+		</li>
+	</ul>
+{% endif %}

@@ -1,0 +1,37 @@
+{% extends 'BraincraftedBootstrapBundle:Form:bootstrap.html.twig' %}
+
+{% block datetime_picker_widget %}
+	{% spaceless %}
+		{% if widget == 'single_text' %}
+			{# TODO: Make this locale dependent #}
+			{% set value = ((value is defined and value is not empty) ? value|date('Y/m/d H:i')) %}
+			{{ block('form_widget_simple') }}
+			<script type="text/javascript">
+				$(function () {
+					$('#{{ id }}').datetimepicker({
+						language: '{{ app.request.locale }}'
+					});
+				});
+			</script>
+		{% else %}
+			{{ block('form_input_group') }}
+		{% endif %}
+	{% endspaceless %}
+{% endblock datetime_picker_widget %}
+
+{% block choice_widget %}
+	{% spaceless %}
+		{% if expanded %}
+			{{ block('choice_widget_expanded') }}
+		{% else %}
+			{{ block('choice_widget_collapsed') }}
+		{% endif %}
+		{% if attr.select2 is defined and attr.select2 %}
+			<script type="text/javascript">
+				$(function () {
+					$('#{{ id }}').select2();
+				});
+			</script>
+		{% endif %}
+	{% endspaceless %}
+{% endblock choice_widget %}

@@ -1,0 +1,28 @@
+{% if id is defined %}
+	<script type="application/javascript">
+		$(function() {
+			var $table = $("#{{ id }}").tablesorter({
+				headers: {
+					{% block headers %}{% endblock %}
+				},
+				headerTemplate : '{content} {icon}',
+				widgets: ["filter"],
+
+				initialized: function(table) {
+					// hide disabled filter inputs after 100 ms
+					setTimeout(function() {
+						$(table).find(".tablesorter-filter.disabled").hide();
+					}, 100);
+				}
+			});
+
+			// deferred event handling
+			$($table).on("click", "a.account-remove[data-target]", function(event) {
+				var targetName = $(event.currentTarget).data("target");
+				$(targetName).modal('show')
+			});
+		});
+	</script>
+{% else %}
+	{% include ':Component:alert.html.twig' with { type:'danger', alert: 'component.tablesorter.error.missing_id'|trans } %}
+{% endif %}

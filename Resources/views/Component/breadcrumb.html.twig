@@ -1,0 +1,16 @@
+<ol class="breadcrumb">
+	{% set uri = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+	{% set pathData = ((uri == '/') ? 'home' : 'home' ~ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')))|split('/')|array_filter %}
+	{% for crumb in pathData %}
+		{% set crumb = crumb|capitalize %}
+		{% if loop.index > 1 %}<span class="divider">/</span>{% endif %}
+		{% set joinedCrumb = (pathData|slice(1, loop.index-1))|join('/') %}
+		{% if is_route('/' ~ joinedCrumb) and not loop.last %}
+			<li class="active"><a href="http://{{ app.request.host ~ '/' ~ joinedCrumb }}">{{ crumb }}</a></li>
+		{% else %}
+			<li class="active">
+				{{ crumb }}
+			</li>
+		{% endif %}
+	{% endfor %}
+</ol>

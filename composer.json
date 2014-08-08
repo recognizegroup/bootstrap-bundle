@@ -1,0 +1,24 @@
+{
+	"name": "recognize/bootstrap-bundle",
+	"type": "symfony-bundle",
+	"description": "Symfony2 bootstrap components",
+	"keywords": ["recognize-bootstrap-bundle", "RecognizeBootstrapBundle"],
+	"homepage": "http://www.recognize.nl",
+	"authors": [
+		{
+			"name": "Nick Obermeijer",
+			"email": "nick@recognize.nl",
+			"homepage": "http://www.recognize.nl/"
+		}
+	],
+	"require": {
+		"symfony/http-foundation": ">=2.4,<2.6-dev",
+		"sensio/framework-extra-bundle": "~3.0",
+		"braincrafted/bootstrap-bundle": "~2.0"
+	},
+	"target-dir": "Recognize/BootstrapBundle",
+	"autoload": {
+		"psr-0": { "Recognize\\BootstrapBundle": "" }
+	},
+	"minimum-stability": "alpha"
+}

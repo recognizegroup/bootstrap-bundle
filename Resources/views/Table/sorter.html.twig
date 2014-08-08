@@ -1,0 +1,25 @@
+{% if id is defined %}
+	<table id="{{ id }}" class="table table-striped{% if tablesorter is defined and tablesorter %} tablesorter{% endif %}">
+		<thead>
+			<tr>
+				{% block head %}
+					<td>Implement me</td>
+				{% endblock head %}
+			</tr>
+		</thead>
+		<tbody>
+			{% block body %}
+				<td>Implement me</td>
+			{% endblock body %}
+		</tbody>
+		<tfoot>
+			<tr>
+				{% block foot %}
+					<td>Implement me</td>
+				{% endblock foot %}
+			</tr>
+		</tfoot>
+	</table>
+{% else %}
+	{% include ':Component:alert.html.twig' with { type:'danger', alert: 'table.sorter.error.missing_id'|trans } %}
+{% endif %}
