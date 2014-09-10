@@ -1,16 +1,16 @@
 {% for flashMessage in app.session.flashbag.get('success') %}
-	{% include ':Component:alert.html.twig' with { type:'success', alert:flashMessage } %}
+	{% include 'RecognizeBootstrapBundle:Component:alert.html.twig' with { type:'success', alert:flashMessage } %}
 {% endfor %}
 {% for flashMessage in app.session.flashbag.get('info') %}
-	{% include ':Component:alert.html.twig' with { type:'info', alert:flashMessage } %}
+	{% include 'RecognizeBootstrapBundle:Component:alert.html.twig' with { type:'info', alert:flashMessage } %}
 {% endfor %}
 {% for flashMessage in app.session.flashbag.get('warning') %}
-	{% include ':Component:alert.html.twig' with { type:'warning', alert:flashMessage } %}
+	{% include 'RecognizeBootstrapBundle:Component:alert.html.twig' with { type:'warning', alert:flashMessage } %}
 {% endfor %}
 {% for flashMessage in app.session.flashbag.get('danger') %}
-	{% include ':Component:alert.html.twig' with { type:'danger', alert:flashMessage } %}
+	{% include 'RecognizeBootstrapBundle:Component:alert.html.twig' with { type:'danger', alert:flashMessage } %}
 {% endfor %}
 {% for flashMessage in app.session.flashbag.get('exception') %}
 	{% set errorMessage = flashMessage.error.message|trans ~ ((app.debug) ? '<br/><br /><pre>' ~ flashMessage.error.trace ~ '</pre>' : '') %}
-	{% include ':Component:alert.html.twig' with { type:'danger', alert:errorMessage } %}
+	{% include 'RecognizeBootstrapBundle:Component:alert.html.twig' with { type:'danger', alert:errorMessage } %}
 {% endfor %}

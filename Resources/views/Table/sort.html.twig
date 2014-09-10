@@ -6,7 +6,7 @@
 	{% set routeParams = app.request.attributes.get('_route_params') %}
 	{% set queryParams = app.request.query.all|merge({ field: ((isCurrentField and request('order') == 'desc') ? null : field), order: orderDirection }) %}
 	{% set merged = routeParams|merge({ offset: request('offset'), limit: request('limit') })|merge(queryParams) %}
-	<a href="{{ path(request('_route'), merged) }}" data-toggle="tooltip" data-placement="top" title="{{ orderTooltip|trans }}">
+	<a href="{{ path(request('_route'), merged) }}" data-tooltip="tooltip" data-placement="top" title="{{ orderTooltip|trans }}">
 		{% block label %}{% endblock label %}
 		{% if request('order') and isCurrentField %}
 			<i class="glyphicon glyphicon-sort-by-{{ (request('order') == 'desc') ? 'alphabet-alt' : 'alphabet' }}"></i>
