@@ -8,5 +8,5 @@
 	{% else %}
 		{% set errors = form.vars.errors[0].message %}
 	{% endif %}
-	{% include ':Component:alert.html.twig' with { type: 'danger', alert: errors } %}
+	{% include 'RecognizeBootstrapBundle:Component:alert.html.twig' with { type: 'danger', alert: errors } %}
 {% endif %}
